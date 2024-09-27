@@ -1,3 +1,4 @@
+
 /* eslint-disable react/prop-types */
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Input } from "../ui/input";
@@ -48,18 +49,35 @@ function ProductImageUpload({
   async function uploadImageToCloudinary() {
     setImageLoadingState(true);
     const data = new FormData();
-    data.append("my_file", imageFile);
-    const response = await axios.post(
-      "http://localhost:5000/api/admin/products/upload-image",
-      data
-    );
-    console.log(response, "response");
+    data.append("file", imageFile);
 
-    if (response?.data?.success) {
-      setUploadedImageUrl(response.data.result.url);
-      setImageLoadingState(false);
+  
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/admin/products/upload-image",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            console.log(`Upload progress: ${percentCompleted}%`);
+          },
+        }
+      );
+      
+      console.log(response, "response");
+  
+      if (response?.data?.success) {
+        setUploadedImageUrl(response.data.result.url);
+        setImageLoadingState(false);
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error.response || error.message);
     }
   }
+  
 
   useEffect(() => {
     if (imageFile !== null) uploadImageToCloudinary();

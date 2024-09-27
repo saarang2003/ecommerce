@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+
 import { Navigate, useLocation } from "react-router-dom";
 
 export default function CheckAuth({ isAuthenticated, user, children }) {
   const location = useLocation();
+
+
+
 
   if (location.pathname === "/") {
     if (!isAuthenticated) {
@@ -15,6 +19,13 @@ export default function CheckAuth({ isAuthenticated, user, children }) {
       }
     }
   }
+
+
+  console.log("isAuthenticated:", isAuthenticated);
+  console.log("user:", user);
+  console.log("current path:", location.pathname);
+
+  
 
   if (
     !isAuthenticated && 
@@ -54,10 +65,3 @@ export default function CheckAuth({ isAuthenticated, user, children }) {
   </>;
 }
 
-CheckAuth.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  user: PropTypes.shape({
-    role: PropTypes.string,
-  }),
-  children: PropTypes.node.isRequired,
-};

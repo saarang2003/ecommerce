@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import {
@@ -9,6 +10,7 @@ import {
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import PropTypes from 'prop-types';
 
 function CommonForm({
   formControls,
@@ -124,5 +126,28 @@ function CommonForm({
     </form>
   );
 }
+
+CommonForm.propTypes = {
+  formControls: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      componentType: PropTypes.oneOf(['input', 'select', 'textarea']).isRequired,
+      placeholder: PropTypes.string,
+      type: PropTypes.string,
+      options: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+          label: PropTypes.string.isRequired,
+        })
+      ),
+    })
+  ).isRequired,
+  formData: PropTypes.object.isRequired,
+  setFormData: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string,
+  isBtnDisabled: PropTypes.bool,
+};
 
 export default CommonForm;
