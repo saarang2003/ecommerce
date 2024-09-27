@@ -1,7 +1,7 @@
-import CommonForm from "../../components/common/form";
-import { useToast } from "../../hooks/use-toast"
-import { registerFormControls } from "../../config/index";
-import { registerUser } from "../../store/authSlice/index";
+import CommonForm from "@/components/common/form";
+import { useToast } from "@/components/ui/use-toast";
+import { registerFormControls } from "@/config";
+import { registerUser } from "@/store/auth-slice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,9 +17,6 @@ function AuthRegister() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { toast } = useToast();
-
-
-  
 
   function onSubmit(event) {
     event.preventDefault();
@@ -56,13 +53,13 @@ function AuthRegister() {
           </Link>
         </p>
       </div>
-      { <CommonForm
+      <CommonForm
         formControls={registerFormControls}
         buttonText={"Sign Up"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
-      /> }
+      />
     </div>
   );
 }

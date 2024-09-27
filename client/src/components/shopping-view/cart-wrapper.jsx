@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
+
 import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
@@ -27,7 +29,7 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
       </SheetHeader>
       <div className="mt-8 space-y-4">
         {cartItems && cartItems.length > 0
-          ? cartItems.map((item) => <UserCartItemsContent key={item.id} cartItem={item} />)
+          ? cartItems.map((item) => <UserCartItemsContent cartItem={item} />)
           : null}
       </div>
       <div className="mt-8 space-y-4">

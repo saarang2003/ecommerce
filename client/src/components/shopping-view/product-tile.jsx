@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";

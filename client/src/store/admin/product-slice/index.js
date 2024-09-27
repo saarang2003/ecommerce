@@ -1,4 +1,4 @@
-
+/* eslint-disable no-unused-vars */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -76,8 +76,7 @@ const AdminProductsSlice = createSlice({
         state.isLoading = false;
         state.productList = action.payload.data;
       })
-      // eslint-disable-next-line no-unused-vars
-      .addCase(fetchAllProducts.rejected, (state,action) => {
+      .addCase(fetchAllProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.productList = [];
       });
